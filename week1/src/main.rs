@@ -1,28 +1,83 @@
 #![allow(dead_code)]
 
-struct Point {
-    x: f32,
-    y: f32,
+use clap::Parser;
+use std::io::{self, BufRead};
+use std::collections::HashMap;
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Cli {
+    name:String,
+    #[arg(short, long)]
+    verbose: bool,
 }
 
-// Structs can be reused as fields of another struct
-struct Rectangle {
-    // A rectangle can be specified by where the top left and bottom right
-    // corners are in space.
-    top_left: Point,
-    bottom_right: Point,
+enum State {
+    Yes,
+    No,
+    Halt,
+    NumberedState{x : i32}
 }
 
-fn rect_area(r : Rectangle) -> f32 {
-    let width = r.bottom_right.x - r.top_left.x;
-    assert!(width >= 0.0);
-    let height = r.bottom_right.y - r.top_left.y;
-    assert!(height >= 0.0);
-    width * height
+enum TapeSymbol {
+    Start,
+    Empty,
+    Zero,
+    One
 }
 
-fn main(){
-    let r = Rectangle{top_left:Point{x:1.0, y:3.0}, bottom_right:Point{x:5.0,y:3.5}};
-    let area = rect_area(r); 
-    print!("{area}");
+struct MachineState {
+    tape : Vec<TapeSymbol>,
+    state : State,
+    head_position : usize
+}
+
+struct InputData{
+    action_map : HashMap<(i32, i32), i32>,
+    input : Vec<TapeSymbol>
+}
+
+enum InputParseError{
+    CliParseError(std::io::Error),
+    ParseIntError(std::num::ParseIntError),
+    NotSupported
+}
+
+impl From<std::io::Error> for InputParseError{
+    fn from(err: std::io::Error) -> Self {
+        Self::CliParseError(err)
+    }
+}
+
+impl From<std::num::ParseIntError> for InputParseError{
+    fn from(err: std::num::ParseIntError) -> Self {
+        Self::ParseIntError(err)
+    }
+}
+
+fn read_input_data() -> Result<InputData, InputParseError> {
+    let stdin = io::stdin();
+    struct FirstLineData{
+        state_count : i32,
+        transitions_count : i32
+    }
+    let mut first_line_data:Option<FirstLineData> = None;
+    for line_result in stdin.lock().lines() {
+        let line:String = line_result?;
+        if first_line_data.is_none(){
+            let line_split:Vec<&str> = line.split(' ').collect();
+            let state_count: i32 = line_split[0].parse()?;
+            let transitions_count: i32 = line_split[1].parse()?;
+            first_line_data = Some(FirstLineData{state_count, transitions_count});
+        }
+        else {
+            let data = first_line_data.unwrap();
+        }
+    }
+
+    return Ok(InputData{action_map:HashMap::new(), input:vec![]});
+}
+
+fn main() {
+    
 }
