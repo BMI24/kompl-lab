@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["input.txt", "10010", "-v"],
+            "args": ["div_by_3.txt", "10010", "-v"],
             "justMyCode": true
         }
     ]
