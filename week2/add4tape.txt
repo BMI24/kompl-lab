@@ -15,39 +15,39 @@
 -1 4 -1 -1
 ...
 # t = tape, o = old, n = new, m=movement
-# state_o, t1_o, t2_o, t3_o, t4_o, state_n, t1_n, t2_n, t3_n, t4_n, m1, m2, m3, m4
-0, 1, _, _, _, copy1, 1, _, _, _, R, N, N, N, N
-copy1, 0, _, _, _, copy1, 0, _, _, _, R, N, N, N
-copy1, 1, _, _, _, copy1, 1, _, _, _, R, N, N, N
-copy1, $, _, _, _, copy2, $, _, _, _, R, N, N, N
-copy2, 0, _, _, _, copy2, _, 0, _, _, R, R, N, N
-copy2, 1, _, _, _, copy2, _, 1, _, _, R, R, N, N
-copy2, _, _, _, _, init_add, _, _, _, _, L, N, N, N
-init_add, _, _, _, _, init_add, _, _, _, _, L, N, N, N
-init_add, $, _, _, _, add0, _, _, _, _, L, L, N, N
+# state_o, t1_o, t2_o, t3_o, t4_o, state_n, t1_n, m1, t2_n, m2, t3_n, m3, t4_n, m4
+0, 1, _, _, _, copy1, 1, R, _, N, _, N, _, N
+copy1, 0, _, _, _, copy1, 0, R, _, N, _, N, _, N
+copy1, 1, _, _, _, copy1, 1, R, _, N, _, N, _, N
+copy1, $, _, _, _, copy2, $, R, _, N, _, N, _, N
+copy2, 0, _, _, _, copy2, _, R, 0, R, _, N, _, N
+copy2, 1, _, _, _, copy2, _, R, 1, R, _, N, _, N
+copy2, _, _, _, _, init_add, _, L, _, N, _, N, _, N
+init_add, _, _, _, _, init_add, _, L, _, N, _, N, _, N
+init_add, $, _, _, _, add0, _, L, _, L, _, N, _, N
 # add0 = add with 0 in carry; add1 = add with 1 in carry
-add0, 0, 0, _, _, add0, _, _, 0, _, L, L, R, N
+add0, 0, 0, _, _, add0, _, L, _, L, 0, R, _, N
 # tr = transpose result
-add0, 1, 0, _, _, add0, _, _, 1, _, L, L, R, N
-add0, 0, 1, _, _, add0, _, _, 1, _, L, L, R, N
-add0, 1, 1, _, _, add1, _, _, 0, _, L, L, R, N
-add1, 0, 0, _, _, add0, _, _, 1, _, L, L, R, N
-add1, 0, 1, _, _, add1, _, _, 0, _, L, L, R, N
-add1, 1, 0, _, _, add1, _, _, 0, _, L, L, R, N
-add1, 1, 1, _, _, add1, _, _, 1, _, L, L, R, N
+add0, 1, 0, _, _, add0, _, L, _, L, 1, R, _, N
+add0, 0, 1, _, _, add0, _, L, _, L, 1, R, _, N
+add0, 1, 1, _, _, add1, _, L, _, L, 0, R, _, N
+add1, 0, 0, _, _, add0, _, L, _, L, 1, R, _, N
+add1, 0, 1, _, _, add1, _, L, _, L, 0, R, _, N
+add1, 1, 0, _, _, add1, _, L, _, L, 0, R, _, N
+add1, 1, 1, _, _, add1, _, L, _, L, 1, R, _, N
 
 
-add0, S, S, _, _, tr, S, S, _, _, N, N, L, N
-add0, 1, S, _, _, add0, _, S, 1, _, L, N, R, N
-add0, 0, S, _, _, add0, _, S, 0, _, L, N, R, N
-add0, S, 1, _, _, add0, S, _, 1, _, N, L, R, N
-add0, S, 0, _, _, add0, S, _, 0, _, N, L, R, N
-add1, S, S, _, _, tr, S, S, 1, _, N, N, N, N
-add1, S, 1, _, _, add1, S, _, 0, _, N, L, R, N
-add1, S, 0, _, _, add0, S, _, 1, _, N, L, R, N
-add1, 1, S, _, _, add1, _, S, 0, _, L, N, R, N
-add1, 0, S, _, _, add0, _, S, 1, _, L, N, R, N
+add0, S, S, _, _, tr, S, N, S, N, _, L, _, N
+add0, 1, S, _, _, add0, _, L, S, N, 1, R, _, N
+add0, 0, S, _, _, add0, _, L, S, N, 0, R, _, N
+add0, S, 1, _, _, add0, S, N, _, L, 1, R, _, N
+add0, S, 0, _, _, add0, S, N, _, L, 0, R, _, N
+add1, S, S, _, _, tr, S, N, S, N, 1, N, _, N
+add1, S, 1, _, _, add1, S, N, _, L, 0, R, _, N
+add1, S, 0, _, _, add0, S, N, _, L, 1, R, _, N
+add1, 1, S, _, _, add1, _, L, S, N, 0, R, _, N
+add1, 0, S, _, _, add0, _, L, S, N, 1, R, _, N
 # tr = tranpose result from tape 3 to tape 4
-tr, S, S, 0, _, tr, S, S, _, 0, N, N, L, R
-tr, S, S, 1, _, tr, S, S, _, 1, N, N, L, R
-tr, S, S, S, _, halt, S, S, S, _, N, N, N, N
+tr, S, S, 0, _, tr, S, N, S, N, _, L, 0, R
+tr, S, S, 1, _, tr, S, N, S, N, _, L, 1, R
+tr, S, S, S, _, halt, S, N, S, N, S, N, _, N

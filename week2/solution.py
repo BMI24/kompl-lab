@@ -29,8 +29,8 @@ for line in lines[2:]:
     q_old = linesplit[0]
     s_old = tuple(linesplit[1:1+tape_count])
     q_new = linesplit[1+tape_count]
-    s_new = tuple(linesplit[2+tape_count:2+2*tape_count])
-    movement = tuple((movement_to_offset[m] for m in linesplit[2+2*tape_count:]))
+    s_new = tuple(linesplit[2+tape_count::2])
+    movement = tuple((movement_to_offset[m] for m in linesplit[3+tape_count::2]))
     transitions[(q_old, s_old)] = (q_new, s_new, movement)
 
 tape_content: list[list[str]] = [list("S_") if i > 0 else list('S'+ args.input) for i in range(tape_count)]
