@@ -24,7 +24,7 @@ with open(args.filename) as file:
 lines = [l for l in lines if not l.startswith('#') and l != '']
 
 state_count, tape_count, alphabet_size, transitions_count = [int(s) for s in lines[0].split(' ')]
-for line in lines[1:]:
+for line in lines[2:]:
     linesplit = [l.rstrip().lstrip() for l in  line.split(',')]
     q_old = linesplit[0]
     s_old = tuple(linesplit[1:1+tape_count])

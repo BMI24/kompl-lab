@@ -13,6 +13,7 @@
 # ------>
 # build result in reversed order on tape3, then transfer it reversed to tape 4
 -1 4 -1 -1
+...
 # t = tape, o = old, n = new, m=movement
 # state_o, t1_o, t2_o, t3_o, t4_o, state_n, t1_n, t2_n, t3_n, t4_n, m1, m2, m3, m4
 0, 1, _, _, _, copy1, 1, _, _, _, R, N, N, N, N
@@ -46,7 +47,7 @@ add1, S, 1, _, _, add1, S, _, 0, _, N, L, R, N
 add1, S, 0, _, _, add0, S, _, 1, _, N, L, R, N
 add1, 1, S, _, _, add1, _, S, 0, _, L, N, R, N
 add1, 0, S, _, _, add0, _, S, 1, _, L, N, R, N
-
+# tr = tranpose result from tape 3 to tape 4
 tr, S, S, 0, _, tr, S, S, _, 0, N, N, L, R
 tr, S, S, 1, _, tr, S, S, _, 1, N, N, L, R
 tr, S, S, S, _, halt, S, S, S, _, N, N, N, N
