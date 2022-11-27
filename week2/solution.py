@@ -41,8 +41,8 @@ def print_info():
     print('-----------------------------')
     for i in range(tape_count):
         print(f'Bandinhalt {i + 1}:')
-        print(''.join(tape_content[i]))
-        print(' '*head_pos[i]+'^')
+        print(' | '.join(tape_content[i]))
+        print(' '*(len(' | '.join(tape_content[i][:head_pos[i]])) + 3 if head_pos[i] > 0 else 0)+'^')
     print('Zustand:', state)
     print('-----------------------------')
 
