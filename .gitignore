@@ -13,3 +13,5 @@ Cargo.lock
 *.exe
 *.pdb
 out.txt
+
+__pycache__
