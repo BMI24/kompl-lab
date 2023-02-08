@@ -62,10 +62,23 @@ lines = lines[line_number:]
 
 clauses = [{int(l) for l in filter(None, l[:-1].split(' '))} for l in lines]
 
+def is_unit(literal : Literal, clauses : Clauses) -> bool:
+    if literal_quantifier[literal] != EXISTS:
+        return False
+    # todo
+
+def is_monoton(literal : Literal, clauses : Clauses) -> bool:
+    # todo
+    pass 
+
+
 def qdpll(clauses: Clauses) -> bool:
     if len(clauses) == 0:
         return True
     if any(len(clause) == 0 for clause in clauses):
         return False
     
+    for literal in (literal for clause in clauses for literal in clause):
+        if is_unit(literal, clauses) or is_monoton(literal, clauses):
+            pass
     
