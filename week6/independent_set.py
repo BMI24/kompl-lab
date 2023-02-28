@@ -32,7 +32,7 @@ def id(name: str) -> int:
 
 lines: List[str]= []
 def add_clause_ids(clauses : List[int]):
-    lines.append(' '.join(str(c) for c in clauses))
+    lines.append(' '.join(str(c) for c in clauses + [0]))
 
 def parse_clause_str(clause : str):
     sign = 1
@@ -61,14 +61,15 @@ class Clause:
 def add_clause(*clauses : Clause):
     add_clause_str(*(str(c) for c in clauses))
 
-# add edge clauses
-for edge in edges:
-    add_clause_str(f'-y{edge[0]}', f'-y{edge[1]}')
-
 def x(i : int, l : int) -> Clause:
     return Clause(f'x{i},{l}')
 def y(l : int) -> Clause:
     return Clause(f'y{l}')
+
+
+# add edge clauses
+for edge in edges:
+    add_clause(-y(edge[0]), -y(edge[1]))
 
 # add init clauses
 add_clause(-x(0, 1), -y(1))
