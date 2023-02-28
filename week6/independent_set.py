@@ -31,26 +31,26 @@ def id(name: str) -> int:
 
 
 lines: List[str]= []
-def add_clause_ids(clauses : List[int]):
-    lines.append(' '.join(str(c) for c in clauses + [0]))
+def add_literal_ids(literals : List[int]):
+    lines.append(' '.join(str(c) for c in literals + [0]))
 
-def parse_clause_str(clause : str):
+def parse_literal_str(literal : str):
     sign = 1
-    if clause[0] == '-':
-        clause = clause[1:]
+    if literal[0] == '-':
+        literal = literal[1:]
         sign = -1
-    return id(clause) * sign
+    return id(literal) * sign
 
-def add_clause_str(*clauses : str):
-    add_clause_ids([parse_clause_str(c) for c in clauses])
+def add_clause_str(*literals : str):
+    add_literal_ids([parse_literal_str(c) for c in literals])
 
-class Clause:
+class Literal:
     def __init__(self, repr : str, neg : bool = False) -> None:
         self.negative : bool = neg
         self.representation : str = repr
-    
-    def __neg__(self) -> Clause:
-        return Clause(self.representation, not self.negative)
+
+    def __neg__(self): 
+        return Literal(self.representation, not self.negative)
     
     def __str__(self) -> str:
         return ('-' if self.negative else '') + self.representation
@@ -58,13 +58,13 @@ class Clause:
     def __repr__(self) -> str:
         return str(self)
 
-def add_clause(*clauses : Clause):
-    add_clause_str(*(str(c) for c in clauses))
+def add_clause(*literals : Literal):
+    add_clause_str(*(str(c) for c in literals))
 
-def x(i : int, l : int) -> Clause:
-    return Clause(f'x{i},{l}')
-def y(l : int) -> Clause:
-    return Clause(f'y{l}')
+def x(i : int, l : int) -> Literal:
+    return Literal(f'x{i},{l}')
+def y(l : int) -> Literal:
+    return Literal(f'y{l}')
 
 
 # add edge clauses
