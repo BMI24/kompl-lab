@@ -43,7 +43,11 @@ def add_clause(*literals : Literal):
     add_clause_str(*(str(c) for c in literals))
 
 def add_implication_clause(reason : Literal, *implied : Literal):
-    add_clause(*([reason] + [-l for l in implied]))
+    add_clause(*([-reason] + [l for l in implied]))
+
+def add_equivalence_clause(left : Literal, right : Literal):
+    add_implication_clause(left, right)
+    add_implication_clause(right, left)
 
 def write_output(path : str):
     with open(path, 'w') as f:
