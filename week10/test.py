@@ -3,8 +3,12 @@ import numpy as np
 from pretty_confusion_matrix import pp_matrix
 from tqdm import tqdm
 import pandas as pd
+import os
 
-primes = set(np.genfromtxt('primes.csv', delimiter=',', dtype=int)[1:, 1])
+dirname = os.path.dirname(__file__)
+primes_path = os.path.join(dirname, 'primes.csv')
+
+primes = set(np.genfromtxt(primes_path, delimiter=',', dtype=int)[1:, 1])
 
 confusion_matrix = np.array([[0, 0], [0, 0]])
 
