@@ -7,7 +7,7 @@ parser = ArgumentParser()
 parser.add_argument('input_file')
 parser.add_argument('-v', '--verbose', action='store_true')
 parser.add_argument('-s', '--verbose_out')
-parser.add_argument('output_filename')
+parser.add_argument('output_path')
 parser.add_argument('k')
 args = parser.parse_args()
 
@@ -52,6 +52,6 @@ for l in range(k):
 
 add_clause(*(x(k, i) for i in range(vert_count)))
 
-write_output(args.output_filename)
+write_output(args.output_path)
 if (args.verbose_out):
     write_verbose_output(args.verbose_out)
