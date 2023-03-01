@@ -1,4 +1,4 @@
-from millerrabin import miller_rabin
+from miller_rabin import miller_rabin
 import numpy as np
 from pretty_confusion_matrix import pp_matrix
 from tqdm import tqdm

@@ -17,7 +17,6 @@ args = parser.parse_args()
 
 transitions: dict[Tuple[str, Tuple[str]], Tuple[str, Tuple[str], Tuple[int]]] = dict()
 
-lines = None
 with open(args.filename) as file:
     lines = [line.rstrip().lstrip() for line in file]
 
