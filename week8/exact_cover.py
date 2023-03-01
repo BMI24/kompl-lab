@@ -21,7 +21,7 @@ def set_used(i : int) -> Literal:
     return Literal(f'set_used_{i}')
 
 set_count = len(sets)
-# prevent use of not existing set elements
+# prevent impossible association of elements with sets
 for i in range(set_count):
     for j in sets[i].difference(range(n)):
         add_clause(-element_used_by_set(i,j))
