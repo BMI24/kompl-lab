@@ -42,6 +42,9 @@ class Literal:
 def add_clause(*literals : Literal):
     add_clause_str(*(str(c) for c in literals))
 
+def add_implication_clause(reason : Literal, *implied : Literal):
+    add_clause(*([reason] + [-l for l in implied]))
+
 def write_output(path : str):
     with open(path, 'w') as f:
         f.write(f'p cnf {len(var_to_id)} {len(out_lines)}\n')
