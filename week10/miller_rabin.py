@@ -6,11 +6,11 @@ import numpy as np
 def miller_rabin(n : int, k : int) -> bool:
     assert(n%2 != 0)
 
-    d = n
-    s = 1
+    d = n - 1
+    s = 0
     while d % 2 == 0:
         d = d // 2
-        s *= 2
+        s += 1
 
     for _ in range(k):
         a = np.random.randint(2, n-1)
